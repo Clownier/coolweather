@@ -8,9 +8,7 @@ import clown.com.coolweather.app.model.City;
 import clown.com.coolweather.app.model.County;
 import clown.com.coolweather.app.model.Province;
 
-/**
- * Created by Clown on 2017/7/7.
- */
+
 
 public class Utility {
     /**
@@ -20,7 +18,7 @@ public class Utility {
             CoolWeatherDB coolWeatherDB,String response) {
         if(!TextUtils.isEmpty(response)){
             String [] allProvinves = response.split(",");
-            if (allProvinves != null && allProvinves.length > 0){
+            if (allProvinves.length > 0){
                 for (String p: allProvinves){
                     String [] array = p.split("\\|");
                     Province province = new Province();
@@ -42,19 +40,21 @@ public class Utility {
     public static boolean handleCitiesResponse(
             CoolWeatherDB coolWeatherDB,String response,int provinceId){
         if(!TextUtils.isEmpty(response)){
-            String[] allCities=response.split(",");
-            if(allCities!=null && allCities.length>0){
-                for (String c: allCities){
-                    String[] array=c.split("\\|");
-                    City city=new City();
+            String[] allCities = response.split(",");
+            if (allCities.length > 0) {
+                for (String c : allCities) {
+                    String[] array = c.split("\\|");
+                    City city = new City();
                     city.setCityCode(array[0]);
                     city.setCityName(array[1]);
-                    Log.d("CityName",array[1]);
+                    Log.d("CityName", array[1]);
                     city.setProvinceId(provinceId);
                     //将解析出来的数据存储到City表
                     coolWeatherDB.saveCity(city);
                 }
                 return true;
+            } else {
+                return false;
             }
         }
         return false;
@@ -66,8 +66,9 @@ public class Utility {
     public static boolean handleCountiesResponse(
             CoolWeatherDB coolWeatherDB,String response,int cityId){
         if(!TextUtils.isEmpty(response)){
-            String[] allCounties=response.split(",");
-            if(allCounties!=null&&allCounties.length>0){
+            String[] allCounties;
+            allCounties = response.split(",");
+            if(allCounties.length > 0){
                 for (String c:allCounties){
                     String[] array=c.split("\\|");
                     County county=new County();

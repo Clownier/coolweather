@@ -4,16 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#484E61"
         android:layout_height="50dp">
+=======
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#484E61">
+>>>>>>> 0721a0ba358c94ad904b05dfd40072821256a557
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/title_text"
             android:layout_centerInParent="true"
+<<<<<<< HEAD
             android:textColor="#fff"
+=======
+>>>>>>> 0721a0ba358c94ad904b05dfd40072821256a557
             android:textSize="24sp"/>
     </RelativeLayout>
 
@@ -22,5 +33,8 @@
         android:layout_height="match_parent"
         android:id="@+id/list_view">
     </ListView>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0721a0ba358c94ad904b05dfd40072821256a557
 </LinearLayout>

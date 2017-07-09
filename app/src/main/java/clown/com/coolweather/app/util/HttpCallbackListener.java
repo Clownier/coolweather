@@ -6,5 +6,5 @@ package clown.com.coolweather.app.util;
 
 public interface HttpCallbackListener {
     void onFinish (String response);
-    void OnError (Exception e);
+    void onError (Exception e);
 }

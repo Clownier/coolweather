@@ -21,7 +21,7 @@ import clown.com.coolweather.app.util.Utility;
  * Created by L.P.H on 2017/7/9.
  */
 
-public class WeatherActivity extends Activity  {
+public class WeatherActivity extends Activity  implements View.OnClickListener{
 
     private LinearLayout weatherInfoLayout;
     /**
@@ -49,6 +49,14 @@ public class WeatherActivity extends Activity  {
      */
     private TextView currentDateText;
 
+    /**
+     * 切换城市按钮
+     */
+    private Button switchCity;
+    /**
+     * 更新天气按钮
+     */
+    private Button refreshWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +82,34 @@ public class WeatherActivity extends Activity  {
             // 没有县级代号时就直接显示本地天气
             showWeather();
         }
+        switchCity = (Button) findViewById(R.id.switch_city);
+        refreshWeather = (Button) findViewById(R.id.refresh_weather);
+        switchCity.setOnClickListener(this);
+        refreshWeather.setOnClickListener(this);
+
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.switch_city:
+                Intent intent = new Intent(this,ChooseAreaActivity.class);
+                intent.putExtra("from_weather_activity",true);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.refresh_weather:
+                publishText.setText("同步中...");
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                String weatherCode = prefs.getString("weather_code","");
+                if(!TextUtils.isEmpty(weatherCode)){
+                    queryWeatherInfo(weatherCode);
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * 查询县级代号所对应的天气代号。
